@@ -1,0 +1,15 @@
+# Basisimage: officieel Python 3.11
+FROM python:3.11-slim
+
+# Werkmap in de container
+WORKDIR /app
+
+# requirements.txt kopiëren en installeren
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Alle projectbestanden kopiëren
+COPY . .
+
+# Commando dat uitgevoerd wordt bij docker run
+CMD ["sh", "-c", "python analyse.py && python analyse_btw.py"]
